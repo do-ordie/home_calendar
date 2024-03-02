@@ -2,7 +2,7 @@ from typing import List
 
 import model
 import db
-import tim
+
 
 
 HEADER_LIMIT = 30

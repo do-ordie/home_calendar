@@ -25,5 +25,17 @@ curl http://127.0.0.1:5000/api/v1/note/ -X POST -d "1|2020-02-02|The train|I rem
 ```python
 curl http://127.0.0.1:5000/api/v1/note/ -X GET 
 ```
+Проверяем функцию read
+```python
+curl http://127.0.0.1:5000/api/v1/note/1/ -X GET 
+```
 
+Проверяем функцию update
+```python
+curl http://127.0.0.1:5000/api/v1/note/1/ -X PUT -d "1|2023-02-02|The train|I remember it" 
+```
 
+Проверяем функцию delate
+```python
+curl http://127.0.0.1:5000/api/v1/note/1/ -X DELET 
+```

@@ -56,7 +56,7 @@ def list():
         return f"failed to LIST with: {ex}", 404
 
 @app.route(NOTE_API_ROOT + "/<_id>/", methods=["GET"])
-def reade(_id: str):
+def read(_id: str):
     try:
         event = _note_logic.read(_id)
         raw_note = _to_raw(event)
