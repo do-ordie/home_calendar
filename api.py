@@ -30,8 +30,6 @@ def _to_raw(event: model.Event) -> str:
         return f"{event.id}|{event.date}|{event.header}|{event.text}"
 
 
-    
-
 API_ROOT = "/api/v1"
 NOTE_API_ROOT = API_ROOT + "/note"
 
@@ -59,15 +57,30 @@ def list():
 
 @app.route(NOTE_API_ROOT + "/<_id>/", methods=["GET"])
 def reade(_id: str):
-    return "reade", 201
+    try:
+        event = _note_logic.read(_id)
+        raw_note = _to_raw(event)
+        return raw_note, 200
+    except Exception as ex:
+        return f"failed to READ with: {ex}", 404
 
 @app.route(NOTE_API_ROOT + "/<_id>/", methods=["PUT"])
 def update(_id: str):
-    return "update", 201
+    try:
+        body = request.get_data().decode('utf-8')
+        event = _from_raw(body)
+        _note_logic.update(_id, event)
+        return "updated", 200
+    except Exception as ex:
+        return f"failed to UPDATE with: {ex}", 404
 
 @app.route(NOTE_API_ROOT + "/<_id>/", methods=["DELET"])
 def delete(_id: str):
-    return "delete", 201
+    try:
+        _note_logic.delete(_id)
+        return "deleted", 200
+    except Exception as ex:
+        return f"failed to DELETE with: {ex}", 404
 
 if __name__ == '__main__':
     app.run(debug=True)

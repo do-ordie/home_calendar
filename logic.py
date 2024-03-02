@@ -33,7 +33,6 @@ class NoteLogic:
 
     def create(self, event: model.Event) -> str:
         self._validate_note(event)
-
         try:
             if event.date not in LIST_DATE:
                 LIST_DATE.append(event.date)
